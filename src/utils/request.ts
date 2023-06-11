@@ -4,7 +4,7 @@ import { showToast } from 'vant';
 import router from '@/router';
 
 const instance = axios.create({
-    baseURL: 'https://consult-api.itheima.net/',
+    baseURL: 'https://consult-api.itheima.net',
     timeout: 1000,
   });
   // 添加请求拦截器
@@ -41,7 +41,11 @@ instance.interceptors.response.use(function (response) {
     data:T
   }
 
-  export const request = <T>(url:string,method:Method='GET',submitData?:object)=>{
+export const request = <T>(
+  url: string,
+  method: Method = 'GET',
+  submitData?: object
+) => {
     return instance.request<any,Data<T>>({
       url,
       method,
