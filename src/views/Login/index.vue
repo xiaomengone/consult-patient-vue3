@@ -5,6 +5,7 @@ import { phoneRules, passwordRules,codeRules } from '@/utils/rules'
 import { apiLogin ,apiCodeLogin, apiCodeMsgLogin } from '@/services/user'
 import { useRoute, useRouter } from "vue-router";
 import { onBeforeUnmount } from "vue";
+import { useCpuserStore } from '@/stores/modules/user'
 
 const phoneNumber = ref('')
 const phonePassword = ref('')
@@ -22,7 +23,8 @@ const onSubmit = async (value) => {
         if (phoneSelect.value) {
             console.log(111, value);
             const res = await apiLogin(phonePassword.value, phoneNumber.value)
-            console.log('res', res);
+            const store = useCpuserStore()
+            store.setUser(res?.data)
             router.push(route.query.returnUrl as string || '/user')
 
         } else {
@@ -32,7 +34,9 @@ const onSubmit = async (value) => {
          if (phoneSelect.value) {   //验证码登录
             console.log(111, value);
             const res = await apiCodeMsgLogin(phoneNumber.value, codePassword.value)
-            router.push(route.query.returnUrl as string || '/user')
+             const store = useCpuserStore()
+            store.setUser(res?.data)
+             router.push(route.query.returnUrl as string || '/user')
 
         } else {
             showToast('请勾选用户协议');
@@ -67,6 +71,10 @@ const handleGetCode = async () => {
          clearInterval(timer)
     })
     
+}
+//点击注册账号
+const registerAccount = () => { 
+   router.push('/register')
 }
 
 </script>
@@ -202,6 +210,7 @@ const handleGetCode = async () => {
         padding: 14px 16px;
         box-sizing: border-box;
         display: flex;
+        justify-content: space-between;
         align-items: center;
 
         .van-checkbox {
@@ -219,5 +228,6 @@ const handleGetCode = async () => {
             color: rgba(22, 194, 163, 0.5);
         }
     }
+    
 }
 </style>

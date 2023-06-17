@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import 'vant/lib/index.css';
 import './styles/main.scss'
-import { Button,Toast,NavBar,Form, Field, CellGroup,Checkbox   } from 'vant';
+import { Button,Toast,NavBar,Form, Field, CellGroup,Checkbox,Tabbar, TabbarItem    } from 'vant';
 
 const app = createApp(App)
 app.use(pinia)
@@ -17,4 +17,6 @@ app.use(Form);
 app.use(Field);
 app.use(CellGroup);
 app.use(Checkbox);
+app.use(Tabbar);
+app.use(TabbarItem);
 app.mount('#app')
