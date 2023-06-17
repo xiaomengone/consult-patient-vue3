@@ -1,4 +1,4 @@
-import type { User ,LoginType} from '@/type/user'
+import type { User ,LoginType,UserInfo} from '@/type/user'
 import { request} from '@/utils/request'
 
 //密码登录
@@ -14,4 +14,9 @@ const apiCodeMsgLogin = (mobile:string,code:string) => {
     return request('/login', 'POST', {mobile,code})
 }
 
-export {apiLogin,apiCodeLogin ,apiCodeMsgLogin}
+// 获取用户信息
+const apiUserInfo = () => {
+  return request<UserInfo>('/patient/myUser', 'GET')
+ }
+
+export {apiLogin,apiCodeLogin ,apiCodeMsgLogin,apiUserInfo}
