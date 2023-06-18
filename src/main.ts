@@ -7,8 +7,9 @@ import 'vant/lib/index.css';
 import './styles/main.scss'
 import {
     Button, Toast, NavBar, Form,
-    Field, CellGroup, Checkbox, Tabbar, TabbarItem,
-    Col, Row, Image as VanImage,Icon ,Cell, CellGroup,Dialog
+    Field, CellGroup, Checkbox, Tabbar, TabbarItem,Popup, 
+    Col, Row, Image as VanImage, Icon, Cell, CellGroup, Dialog,
+    ActionBar, ActionBarIcon, ActionBarButton
 } from 'vant';
 
 const app = createApp(App)
@@ -30,4 +31,8 @@ app.use(Icon);
 app.use(Cell);
 app.use(CellGroup);
 app.use(Dialog);
+app.use(Popup);
+app.use(ActionBar);
+app.use(ActionBarIcon);
+app.use(ActionBarButton);
 app.mount('#app')

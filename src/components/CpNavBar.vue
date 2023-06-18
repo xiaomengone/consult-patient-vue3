@@ -4,10 +4,13 @@ import { showToast } from 'vant';
 type NaveBar={
     title?: string,
     rightText?: string
+    back?:()=>void
 }
 
-const { title, rightText }=defineProps<NaveBar>()
+const { title, rightText , back }=defineProps<NaveBar>()
 const onClickLeft = () => { 
+    if (back)  
+        return back()
     if (history.state?.back) {
         history.back();
     } else { 

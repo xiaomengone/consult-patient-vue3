@@ -18,6 +18,7 @@ const router = createRouter({
         { path: '/notify', component: () => import('@/views/notify/index.vue'), meta: {title:'消息通知'} },
       ]
     },
+    { path: '/user/patient', component: () => import('@/views/User/PatientPage.vue'), meta: {title:'家庭档案'} },
   ]
 })
 

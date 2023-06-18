@@ -1,5 +1,6 @@
-import type { User ,LoginType,UserInfo} from '@/type/user'
-import { request} from '@/utils/request'
+import { Patient } from './../type/user.d';
+import type { User ,LoginType,UserInfo,Patient} from '@/type/user'
+import { request,PatientList} from '@/utils/request'
 
 //密码登录
 const apiLogin = (password:string,mobile:string) => { 
@@ -19,4 +20,22 @@ const apiUserInfo = () => {
   return request<UserInfo>('/patient/myUser', 'GET')
  }
 
-export {apiLogin,apiCodeLogin ,apiCodeMsgLogin,apiUserInfo}
+const apiPatientList = () => { 
+  return request<PatientList>('/patient/mylist')
+}
+//添加患者
+const apiAddPatient = (obj:Patient) => { 
+  return request('/patient/add','POST',obj)
+}
+// 修改患者
+const apiFixPatient = (Patient:Patient) => { 
+  return request<Patient>('/patient/update','PUT',Patient)
+}
+// 删除患者
+const delPatient = (id:string) => { 
+  return request(`/patient/del/${id}`,'delete')
+}
+export {
+  apiLogin, apiCodeLogin, apiCodeMsgLogin, apiUserInfo,
+  apiPatientList, apiAddPatient,apiFixPatient,delPatient
+}
