@@ -9,7 +9,8 @@ import {
     Button, Toast, NavBar, Form,
     Field, CellGroup, Checkbox, Tabbar, TabbarItem,Popup, 
     Col, Row, Image as VanImage, Icon, Cell, CellGroup, Dialog,
-    ActionBar, ActionBarIcon, ActionBarButton
+    ActionBar, ActionBarIcon, ActionBarButton, Swipe, SwipeItem,
+    Tab, Tabs ,List 
 } from 'vant';
 
 const app = createApp(App)
@@ -35,4 +36,9 @@ app.use(Popup);
 app.use(ActionBar);
 app.use(ActionBarIcon);
 app.use(ActionBarButton);
+app.use(Swipe);
+app.use(SwipeItem);
+app.use(Tab);
+app.use(Tabs);
+app.use(List);
 app.mount('#app')
