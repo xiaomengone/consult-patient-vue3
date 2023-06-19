@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import KnowledgeList from './components/KnowledgeList.vue'
+import FollowDoctor from './components/FollowDoctor.vue'
 
 const active=ref('1')
 </script>
@@ -80,7 +81,10 @@ const active=ref('1')
       </van-swipe>
     </div>
     <van-tabs v-model:active="active" sticky>
-    <van-tab title="关注" name="1"><KnowledgeList type="like"></KnowledgeList></van-tab>
+    <van-tab title="关注" name="1">
+      <FollowDoctor></FollowDoctor>
+      <KnowledgeList type="like">
+    </KnowledgeList></van-tab>
     <van-tab title="推荐" name="2"><KnowledgeList type="recommend"></KnowledgeList></van-tab>
     <van-tab title="减脂" name="3"><KnowledgeList type="fatReduction"></KnowledgeList></van-tab>
     <van-tab title="饮食" name="4"><KnowledgeList type="food"></KnowledgeList></van-tab>

@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "@vueuse/core": "^10.2.0",
     "axios": "^1.4.0",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",

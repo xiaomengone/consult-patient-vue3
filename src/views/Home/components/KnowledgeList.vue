@@ -17,9 +17,8 @@ const params = ref<KnowledgeParams>({
 })
 const onLoad = async() => { 
     const res = await apiGetKnowlegeList(params.value)
-    list.value.push(...res.data.rows)
-    console.log(1, res.data);
-    if (params.current >= res.data.pageTotal)
+    list.value.push(...res?.data.rows)
+    if (params?.current >= res?.data.pageTotal)
         finished.value = true;
     else
         params.value.current++

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type {Knowledge } from '@/type/consult'
+import { useFollow } from '@/composables/index'
 
 defineProps<{
     item: Knowledge
 }>()
+const { loading, followWithInterest } = useFollow('knowledge')
 </script>
 
 <template>
@@ -15,12 +17,19 @@ defineProps<{
                 <p class="name">{{item.creatorName}}</p>
                 <p class="dep van-ellipsis">{{item.creatorHospatalName}} {{item.creatorDep }} {{item.creatorTitles }}</p>
             </div>
-            <van-button class="btn" size="small" round>{{ item.likeFlag===1?'已关注':'+关注'}}</van-button>
+            <van-button 
+            @click="followWithInterest(item)" 
+            class="btn" size="small" 
+            round
+            :loading="loading"
+            >
+            {{ item.likeFlag===1?'已关注':'+关注'}}
+        </van-button>
         </div>
         <div class="body">
             <h3 class="title van-ellipsis">{{item.title }}</h3>
             <p class="tag">
-                <span># {{item.topic}}</span>
+                <span># {{item?.topic}}</span>
             </p>
             <p class="intro van-multi-ellipsis--l2">
                {{item.content.replace(/<[^>]+>/g, '') }}
