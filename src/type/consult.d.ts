@@ -1,3 +1,5 @@
+import {EnumConsultationType,EnumConsultationTime } from '@/enums/index'
+
 // 文章信息类型
 export type Knowledge = {
   id: string
@@ -76,6 +78,57 @@ export type TypeLike = {
   type: 'topic' | 'knowledge'|'doc' | 'disease',
   id:string
 }
-export type TypeLikeCotegory='topic' | 'knowledge'|'doc' | 'disease'
+
+export type TypeLikeCotegory = 'topic' | 'knowledge' | 'doc' | 'disease'
+
+export type Image = {
+  /** 图片ID */
+  id: string
+  /** 图片地址 */
+  url: string
+}
+// 问诊记录
+export type Illness = {
+  illnessDesc: string,
+  illnessTime: number,
+  consultFlag:number
+}
+export type Consult = {
+  /** 问诊记录ID */
+  id?: string
+  /** 问诊类型 */
+  type?: EnumConsultationType
+  /** 快速问诊类型，0 普通 1 三甲 */
+  illnessType?: 0 | 1
+  /** 科室ID */
+  depId?: string
+  /** 疾病描述 */
+  illnessDesc?: string
+  /** 疾病持续时间 */
+  illnessTime?: EnumConsultationTime
+  /** 是否就诊过，0 未就诊过  1 就诊过 */
+  consultFlag?: 0 | 1
+  /** 图片数组 */
+  pictures?: Image[]
+  /** 患者ID */
+  patientId?: string
+  /** 优惠券ID */
+  couponId?: string
+}
+
+// 获取科室
+export type SecondaryType = {
+  id: string,
+  name: string,
+  avatar?:string
+}
+
+export type DecType = {
+  id: string,
+  name: string
+  child:SecondaryType[]
+}
+// 病情描述对象
+export type ConsultIllness = Pick<Consult,'illnessDesc'|'illnessTime'|'consultFlag'|'pictures'>
 
 

@@ -18,7 +18,10 @@ const router = createRouter({
         { path: '/notify', component: () => import('@/views/notify/index.vue'), meta: {title:'消息通知'} },
       ]
     },
-    { path: '/user/patient', component: () => import('@/views/User/PatientPage.vue'), meta: {title:'家庭档案'} },
+    { path: '/user/patient', component: () => import('@/views/User/PatientPage.vue'), meta: { title: '家庭档案' } },
+    { path: '/consult/fast', component: () => import('@/views/consult/consultFast.vue'), meta: { title: '极速问诊' } },
+    { path: '/consult/dep', component: () => import('@/views/consult/consultDep.vue'), meta: { title: '选择科室' } },
+    { path: '/consult/illness', component: () => import('@/views/consult/consultIllness.vue'), meta: { title: '病情描述' } },
   ]
 })
 
