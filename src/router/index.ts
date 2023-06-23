@@ -6,7 +6,8 @@ import 'nprogress/nprogress.css'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/login', component: () => import('@/views/Login/index.vue'), meta: {title:'登录'} },
+    { path: '/login', component: () => import('@/views/Login/index.vue'), meta: { title: '登录' } },
+    { path: '/register', component: () => import('@/views/Register/index.vue'), meta: {title:'注册'} },
     {
       path: '/',
       redirect:'/user',

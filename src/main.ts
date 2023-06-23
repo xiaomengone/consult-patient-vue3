@@ -11,7 +11,7 @@ import {
     Col, Row, Image as VanImage, Icon, Cell, CellGroup, Dialog,
     ActionBar, ActionBarIcon, ActionBarButton, Swipe, SwipeItem,
     Tab, Tabs, List, Sidebar, SidebarItem, Uploader, Button, Toast,  
-    SubmitBar ,ActionSheet 
+    SubmitBar ,ActionSheet ,TextEllipsis 
 } from 'vant';
 
 const app = createApp(App)
@@ -49,4 +49,5 @@ app.use(Button);
 app.use(Toast);
 app.use(ActionSheet);
 app.use(SubmitBar);
+app.use(TextEllipsis);
 app.mount('#app')

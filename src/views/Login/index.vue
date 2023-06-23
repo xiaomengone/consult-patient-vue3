@@ -73,10 +73,9 @@ const handleGetCode = async () => {
     
 }
 //点击注册账号
-const registerAccount = () => { 
-   router.push('/register')
+const register = () => { 
+    router.push('/register')
 }
-
 </script>
 
 <template>
@@ -149,6 +148,7 @@ const registerAccount = () => {
             </div>
             <div class="cp-cell">
                 <a href="javascript:;">忘记密码？</a>
+                <van-button @click="register" round size="small">去注册</van-button>
             </div>
         </van-form>
         <!-- 底部 -->
