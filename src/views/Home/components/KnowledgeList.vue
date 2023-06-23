@@ -11,35 +11,48 @@ const loading = ref(false)
 const finished = ref(false)
 const list = ref<Knowledge[]>([])
 const params = ref<KnowledgeParams>({
-    type: props.type,
+  type: props.type,
   current: 1,
   pageSize: 5
 })
-const onLoad = async() => { 
+// const onLoad = async() => {
+//     const res = await apiGetKnowlegeList(params.value)
+//     list.value.push(...res?.data.rows)
+//     if (params.value.current >= res?.data.pageTotal)
+//         finished.value = true;
+//     else
+//         params.value.current++
+//     loading.value = false;
+// }
+// 滚动到底部
+const onLoad = async () => {
     const res = await apiGetKnowlegeList(params.value)
-    list.value.push(...res?.data.rows)
-    if (params?.current >= res?.data.pageTotal)
-        finished.value = true;
-    else
+    console.log(5, res.data.rows);
+    list.value.push(...res.data.rows)
+    // 判断已经加载完成了
+    if (params.value.current >= res.data.pageTotal) {
+        finished.value = true
+    } else {
         params.value.current++
-    loading.value = false;
+    }
+    loading.value = false
 }
 </script>
 
 <template>
     <div class="knowledge-list">
-        <van-list
+    <van-list
       v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
     >
-    <knowledge-card 
-        v-for="item in list" 
-        :key="item.id" 
-        :item="item"
-    >
-    </knowledge-card>
+        <KnowledgeCard
+          v-for="item in list" 
+          :key="item.id" 
+          :item="item"
+        >
+        </KnowledgeCard>
     </van-list>
     </div>
 </template>

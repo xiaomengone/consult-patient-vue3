@@ -92,9 +92,14 @@ const active=ref('1')
     <van-tab title="关注" name="1">
       <FollowDoctor></FollowDoctor>
       <KnowledgeList type="like">
-    </KnowledgeList></van-tab>
-    <van-tab title="推荐" name="2"><KnowledgeList type="recommend"></KnowledgeList></van-tab>
-    <van-tab title="减脂" name="3"><KnowledgeList type="fatReduction"></KnowledgeList></van-tab>
+      </KnowledgeList>
+    </van-tab>
+    <van-tab title="推荐" name="2">
+      <KnowledgeList type="recommend"></KnowledgeList>
+    </van-tab>
+    <van-tab title="减脂" name="3">
+      <KnowledgeList type="fatReduction"></KnowledgeList>
+    </van-tab>
     <van-tab title="饮食" name="4"><KnowledgeList type="food"></KnowledgeList></van-tab>
   </van-tabs>
   </div>

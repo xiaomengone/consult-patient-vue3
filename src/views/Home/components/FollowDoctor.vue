@@ -15,7 +15,6 @@ const para = ref<paramsDoc>({
 const setList = async() => { 
  const res = await apiGetDoc(para.value)
     list.value=res.data
-    console.log('1res',res.data);
 }
 onMounted(() => { 
     setList()   

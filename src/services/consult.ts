@@ -33,5 +33,18 @@ const apiGetPay = (params:ConsultOrderPreParams) => {
 const createConsultOrder = (data:any) => { 
     return request<{id:string}>('/patient/consult/order','POST',data)
 }
+// 订单支付
+const apiPayment = (params: {
+    paymentMethod: 0 | 1,
+    orderId: string,
+    payCallback?:string
+}) => { 
+    return request<{
+        payUrl:string
+    }>('/patient/consult/pay','POST',params)
+}
 
-export { apiGetKnowlegeList,apiGetDoc,apiLike,apiGetDep,apiUpload,apiGetPay,createConsultOrder}
+export {
+    apiGetKnowlegeList, apiGetDoc, apiLike, apiGetDep,
+    apiUpload, apiGetPay, createConsultOrder,apiPayment
+}

@@ -3,7 +3,7 @@ import CpNavBar from '@/components/CpNavBar.vue'
 import { onMounted, ref } from 'vue'
 import { payRequest, payParams } from '@/type/consult'
 import { Patient } from '@/type/user'
-import { apiGetPay, createConsultOrder } from '@/services/consult'
+import { apiGetPay, createConsultOrder, apiPayment } from '@/services/consult'
 import { useConsultStore } from '@/stores'
 import { apiGetPatien } from '@/services/user'
 import { Lazyload, showDialog  } from 'vant';
@@ -51,6 +51,21 @@ const submitNext = async () => {
   loading.value = false
   store.clearData()
   show.value=true
+}
+const pay = async () => { 
+  if (payMethod.value == undefined) { 
+    return showDialog({
+      title: '温馨提示',
+      message: '请选择支付方式',
+    })
+  }
+  const res = await apiPayment({
+    paymentMethod: payMethod.value,
+    orderId: orderId.value,
+    payCallback:'http://localhost:5173/room'
+  })
+  window.location.href = res.data.payUrl
+  
 }
 </script>
 
@@ -105,7 +120,7 @@ const submitNext = async () => {
             </van-cell>
           </van-cell-group>
           <div class="btn">
-            <van-button type="primary" round block>立即支付</van-button>
+            <van-button type="primary" @click="pay" round block>立即支付</van-button>
           </div>
         </div>
 </van-action-sheet>
