@@ -1,0 +1,1 @@
+import{r as t}from"./request-9f1dea72.js";const a=e=>t("/patient/home/knowledge","GET",e),n=e=>t("/home/page/doc","GET",e),o=e=>t("/like","POST",e),s=()=>t("/dep/all"),p=e=>t("/patient/consult/order/pre","GET",e),c=e=>t("/patient/consult/order","POST",e),i=e=>t("/patient/consult/pay","POST",e);export{o as a,a as b,n as c,s as d,p as e,c as f,i as g};

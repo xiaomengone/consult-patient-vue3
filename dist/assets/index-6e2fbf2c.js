@@ -1,0 +1,1 @@
+var a=(r=>(r[r.askDoctor=1]="askDoctor",r[r.rapidConsultation=2]="rapidConsultation",r[r.medicationConsultation=3]="medicationConsultation",r))(a||{}),c=(r=>(r[r.week=1]="week",r[r.mounth=2]="mounth",r[r.halfYear=3]="halfYear",r[r.moreHalfYear=4]="moreHalfYear",r))(c||{});export{a as E,c as a};
