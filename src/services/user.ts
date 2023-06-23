@@ -35,7 +35,12 @@ const apiFixPatient = (Patient:Patient) => {
 const delPatient = (id:string) => { 
   return request(`/patient/del/${id}`,'delete')
 }
+// 获取患者
+const apiGetPatien = (id:string) => { 
+  return request<Patient>(`/patient/info/${id}`)
+}
 export {
   apiLogin, apiCodeLogin, apiCodeMsgLogin, apiUserInfo,
-  apiPatientList, apiAddPatient,apiFixPatient,delPatient
+  apiPatientList, apiAddPatient, apiFixPatient, delPatient,
+  apiGetPatien
 }

@@ -5,10 +5,13 @@ import type { PatientList, Patient } from '@/type/user'
 import CpRadioBtn from '@/components/CpRadioBtn.vue'
 import CpNavBar from '@/components/CpNavBar.vue'
 import { nameRules, idCardRules } from '@/utils/rules'
-import { FormInstance, showConfirmDialog, showSuccessToast } from 'vant'
-import { showDialog } from 'vant';
+import { FormInstance, showConfirmDialog, showDialog, showSuccessToast } from 'vant'
+import { useRoute, useRouter } from 'vue-router'
+import { useConsultStore } from '@/stores'
+import router from '@/router'
 
-const showRight=ref(false)
+const showRight = ref(false)
+const route = useRoute()
 const patientList = ref<PatientList>()
 const options = [
     { label: '男', value: 1 },
@@ -24,10 +27,17 @@ const Patient = ref<Patient>({
     ...initPaient
 })
 const form = ref<FormInstance>()
+const patientId = ref<string>()
+const store = useConsultStore()
 //获取患者列表
 const loadList = async() => { 
-     const res = await apiPatientList()
+    const res = await apiPatientList()
     patientList.value = res?.data
+    if (route.query.isChange && patientList.value?.length) { 
+        const defPatientList = patientList.value.find((item) => item.defaultFlag === 1)
+        if (defPatientList) patientId.value = defPatientList.id
+        else patientId.value = patientList.value[0].id
+    }
 }
 // 打开弹出框,添加。编辑
 const showPopup = (item?: Patient) => { 
@@ -73,16 +83,44 @@ const onClickButton = async () => {
     showRight.value = false
     loadList()
     }
-  
+}
+ const msg = computed(() => { 
+   return route.query.isChange==='1' ? '选择患者':'家庭档案'
+ })
+//  选择患者
+const selectPatient = (item) => {
+    if (!!route.query.isChange) { 
+        patientId.value = item.id
+    }
+ }
+const next =async () => { 
+    if (!!patientId.value) {
+        store.setPationtId(patientId.value)
+    } else { 
+        showDialog({
+            title: '标题',
+            message: '代码是写出来给人看的，附带能在机器上运行。',
+        })
+    }
+    router.push('/consult/pay')
 }
 
 </script>
 
 <template>
     <div class="patient-page">
-        <cp-nav-bar title="家庭档案"></cp-nav-bar>
+        <cp-nav-bar :title="msg"></cp-nav-bar>
+     <div class="patient-change" v-if="msg==='选择患者'">
+          <h3>请选择患者信息</h3>
+          <p>以便医生给出更准确的治疗，信息仅医生可见</p>
+        </div>
         <div class="patient-list">
-            <div class="patient-item" v-for="item in patientList" :key="item.id">
+            <div class="patient-item"
+              v-for="item in patientList" 
+              :key="item.id"
+              @click="selectPatient(item)" 
+              :class="{ active:item.id== patientId }"
+             >
                 <div class="info">
                     <span class="name">{{item.name}}</span>
                     <span class="id">{{item.idCard.replace(/^(.{6}).+(.{4})$/,'$1********$2')}}</span>
@@ -90,7 +128,7 @@ const onClickButton = async () => {
                     <span>{{item.age}}岁</span>
                 </div>
                 <!-- 编辑 -->
-                <div class="icon" @click="showPopup(item)"><van-icon name="edit" /></div>
+                <div class="icon" @click.stop="showPopup(item)"><van-icon name="edit" /></div>
                 <div class="tag" v-if="item.defaultFlag==1">默认</div>
             </div>
             <div class="patient-add" v-if="patientList?.length<6" @click="showPopup()">
@@ -152,6 +190,14 @@ const onClickButton = async () => {
     </van-action-bar>
     </div>
     </van-popup>
+    <div class="patient-next" v-if="msg === '选择患者'">
+          <van-button 
+            type="primary"
+            round
+            block
+            @click="next"
+            >下一步</van-button>
+        </div>
     </div>
 </template>
 
@@ -270,5 +316,29 @@ const onClickButton = async () => {
 
 .pb4 {
     padding-bottom: 4px;
-}</style>
+}
+.patient-change {
+  padding: 15px;
+  > h3 {
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+  > p {
+    color: var(--cp-text3);
+  }
+}
+.patient-next {
+  padding: 15px;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  box-sizing: border-box;
+}
+.active {
+    background-color: skyblue;
+}
+</style>
 

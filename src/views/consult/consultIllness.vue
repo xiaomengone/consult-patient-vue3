@@ -2,12 +2,13 @@
 import CpNavBar from '@/components/CpNavBar.vue'
 import CpRadioBtn from '@/components/CpRadioBtn.vue'
 import { EnumConsultationTime } from '@/enums'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { ConsultIllness } from '@/type/consult'
 import { apiUpload } from '@/services/consult'
 import { showToast } from 'vant';
 import { useConsultStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import { showConfirmDialog } from 'vant';
 
 const timeOptions = [
   { label: '一周内', value: EnumConsultationTime.week },
@@ -25,17 +26,36 @@ const form = ref<ConsultIllness>({
   consultFlag: 1,
 })
 const router = useRouter()
+const store = useConsultStore()
 
 const next = () => { 
   if (!form.value.illnessDesc) { 
     showToast('请输入病情描述');
     return
   }
-  const store = useConsultStore()
   store.setIllness(form.value)
 
   router.push('/user/patient?isChange=1')
 }
+// 数据回显
+onMounted(() => { 
+if (!!store.consult.illnessDesc) { 
+  showConfirmDialog({
+    title: '温馨提示',
+    closeOnPopstate:false,
+    message:
+      '需要回显数据吗？',
+  }).then(() => { 
+    const { illnessDesc, illnessTime , consultFlag } = store.consult
+     form.value.illnessDesc= illnessDesc,
+      form.value.illnessTime= illnessTime,
+      form.value.consultFlag= consultFlag,
+    console.log('确定');
+  })
+}
+
+})
+
 
 </script>
 

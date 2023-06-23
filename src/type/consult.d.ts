@@ -1,4 +1,5 @@
 import {EnumConsultationType,EnumConsultationTime } from '@/enums/index'
+import type { templateRef } from '@vueuse/core'
 
 // 文章信息类型
 export type Knowledge = {
@@ -128,6 +129,25 @@ export type DecType = {
   name: string
   child:SecondaryType[]
 }
+
+// 支付页面
+// 问诊订单预支付传参
+export type ConsultOrderPreParams = Pick<Consult, 'type' | 'illnessType'>
+
+// 问诊订单预支付信息
+export type ConsultOrderPreData = {
+  /** 积分抵扣 */
+  pointDeduction: number
+  /** 优惠券抵扣 */
+  couponDeduction: number
+  /** 优惠券ID */
+  couponId: string
+  /** 需付款 */
+  payment: number
+  /** 实付款 */
+  actualPayment: number
+}
+
 // 病情描述对象
 export type ConsultIllness = Pick<Consult,'illnessDesc'|'illnessTime'|'consultFlag'|'pictures'>
 

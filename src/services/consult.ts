@@ -1,7 +1,8 @@
 import { request } from "@/utils/request";
 import type {
     KnowledgeParams, KnowledgePage, paramsDoc,
-    ResDoc, ResDocRows,TypeLike,DecType
+    ResDoc, ResDocRows, TypeLike, DecType, ConsultOrderPreParams,
+    ConsultOrderPreData
 } from '@/type/consult'
 
 const apiGetKnowlegeList = (params:KnowledgeParams) => { 
@@ -24,5 +25,13 @@ const apiUpload = (file: File) => {
     fd.append('file',file)
     return request('/upload','POST',fd)
 }
+// 支付页面
+const apiGetPay = (params:ConsultOrderPreParams) => { 
+    return request<ConsultOrderPreData>('/patient/consult/order/pre','GET',params)
+}
+// 生成订单
+const createConsultOrder = (data:any) => { 
+    return request<{id:string}>('/patient/consult/order','POST',data)
+}
 
-export { apiGetKnowlegeList,apiGetDoc,apiLike,apiGetDep,apiUpload}
+export { apiGetKnowlegeList,apiGetDoc,apiLike,apiGetDep,apiUpload,apiGetPay,createConsultOrder}

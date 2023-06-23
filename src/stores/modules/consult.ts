@@ -23,7 +23,23 @@ export const useConsultStore = defineStore('consult', () => {
         consult.value.illnessTime = type.illnessTime
         consult.value.consultFlag=type.consultFlag
     }
-    return {consult,setType,setIllnessType,selectDepartment,setIllness}
+    //记录患者
+    const setPationtId = (type:string|undefined) => { 
+        consult.value.patientId=type
+    }
+    // 记录优惠卷
+    const setCoupon = (id: string) => {
+        consult.value.couponId=id
+    }
+    // 清理数据
+    const clearData = () => { 
+        consult.value = {}
+    }
+
+    return {
+        consult, setType, setIllnessType, selectDepartment,
+        setIllness, setPationtId,setCoupon,clearData
+    }
 },
 {
   persist: true                               //使用

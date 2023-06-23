@@ -22,6 +22,8 @@ const router = createRouter({
     { path: '/consult/fast', component: () => import('@/views/consult/consultFast.vue'), meta: { title: '极速问诊' } },
     { path: '/consult/dep', component: () => import('@/views/consult/consultDep.vue'), meta: { title: '选择科室' } },
     { path: '/consult/illness', component: () => import('@/views/consult/consultIllness.vue'), meta: { title: '病情描述' } },
+    { path: '/consult/pay', component: () => import('@/views/consult/consultPay.vue'), meta: { title: '支付页面' } },
+
   ]
 })
 
